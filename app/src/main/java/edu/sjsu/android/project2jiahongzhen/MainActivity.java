@@ -53,15 +53,23 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
         // TODO: set x, y, timestamp based on the sensor data
         // lesson 9 page 16
-        if (display.getRotation() == Surface.ROTATION_0)
-        {
+        if (display.getRotation() == Surface.ROTATION_0) {
             x = sensorEvent.values[0];
             y = sensorEvent.values[1];
         }
-        else if (display.getRotation() == Surface.ROTATION_90)
-        {
-
+        else if (display.getRotation() == Surface.ROTATION_90) {
+            x = sensorEvent.values[1];
+            y = sensorEvent.values[0];
         }
+        else if(display.getRotation() == Surface.ROTATION_180){
+            x = sensorEvent.values[0];
+            y = sensorEvent.values[1];
+        }
+        else {
+            x = sensorEvent.values[1];
+            y = sensorEvent.values[0];
+        }
+
         timestamp = sensorEvent.timestamp;
     }
 

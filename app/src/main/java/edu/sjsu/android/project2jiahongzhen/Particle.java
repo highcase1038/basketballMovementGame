@@ -19,7 +19,7 @@ public class Particle {
      */
     public void updatePosition(float x, float y, long timestamp) {
         // change the divisor to change the speed of the ball
-        float dt = (System.nanoTime() - timestamp) / 150000000.0f;
+        float dt = (System.nanoTime() - timestamp) / 80000000.0f;
         mVelX += -x * dt;
         mVelY += -y * dt;
         mPosX += mVelX * dt;

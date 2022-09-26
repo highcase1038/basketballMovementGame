@@ -16,7 +16,7 @@ public class MyView extends View {
     4 floats: originX, originY, horizontalBound, verticalBound
     1 Particle object that defines the position of the ball
      */
-    private final int BALL_SIZE = 150;
+    private final int BALL_SIZE = 175;
     private Bitmap field, ball;
     private float originX, originY, horizontalBound, verticalBound;
     private Particle particle;
@@ -33,8 +33,11 @@ public class MyView extends View {
     {
         super.onSizeChanged(w,h,oldw,oldh);
         originX = w / 2f;
-        originY = w / 2f;
+        originY = h / 2f;
+
         // TODO: set horizontalBounds, verticalBound
+        horizontalBound = originX-ball.getWidth()/2;
+        verticalBound = originY-ball.getHeight()/2;
         field = Bitmap.createScaledBitmap(field, w, h, false);
     }
     @Override
@@ -44,13 +47,15 @@ public class MyView extends View {
         // TODO: draw the ball so that it will be on the center at the beginning
         // And moves based on particle object's data
         // base on particle.mPosX and particle.mPosY, BALL_SIZE, originX, originY
-        canvas.drawBitmap(ball, originX - particle.mPosX,originY - particle.mPosY, null);
+        //canvas.drawBitmap(ball, particle.mPosY ,particle.mPosX, null);
+        canvas.drawBitmap(ball, originX+particle.mPosX-ball.getWidth()/2 ,originY-particle.mPosY-ball.getHeight()/2, null);
 
         // TODO: draw your name
-        Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
-        paint.setTextSize(50);
-        canvas.drawText("Jiahong Zhen",originX,originY, paint);
+        Paint myName = new Paint();
+        myName.setColor(Color.BLACK);
+        myName.setAlpha(120);
+        myName.setTextSize(80);
+        canvas.drawText("Jiahong Zhen",originX-250,originY-50, myName);
 
 
         particle.updatePosition(MainActivity.x, MainActivity.y, MainActivity.timestamp);
